@@ -34,7 +34,7 @@ public class JpaConfig {
         properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
         properties.put("hibernate.format_sql", "true"); //sql 포멧 이쁘게 보기(안하면 한줄로 나옴)
         properties.put("hibernate.use_sql_comment", "true");    //SQL 볼때 주석 처리 된것두 확인하기
-
+        properties.put("hibernate.hbm2ddl.auto","update");  //테이블 자동생성
         em.setJpaPropertyMap(properties);
         return em;
     }

@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.time.LocalDateTime;
-
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @NoArgsConstructor
 @Getter
@@ -19,5 +17,5 @@ public class PostResponseDto {
     private String poTitle;
     private String poContent;
     private String poAuthor;
-    private LocalDateTime poCreatedAt;
+    private String poCreatedAt;
 }
