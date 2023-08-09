@@ -18,5 +18,5 @@ logging:
 #  datasource:
 #    username: "root"
 #    password: "asdf1234"
-#    url: "jdbc:mysql://localhost:3306/week_1?useUnicode=true&characterEncoding=UTF-8"
+#    url: "jdbc:mysql://localhost:3306/commerce_1st?useUnicode=true&characterEncoding=UTF-8"
 #    driver-class-name: "com.mysql.cj.jdbc.Driver"
