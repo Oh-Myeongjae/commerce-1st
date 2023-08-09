@@ -16,6 +16,7 @@ import java.util.Map;
 @Configuration
 @EnableJpaRepositories(
         basePackages = {"com.github.commerce03.repository.post","com.github.commerce03.repository.like"},
+        basePackages = {"com.github.commerce03.repository.post","com.github.commerce03.repository.commend"},
         entityManagerFactoryRef = "entityManagerFactoryBean",
         transactionManagerRef = "tm"
 )
@@ -26,6 +27,7 @@ public class JpaConfig {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource);
         em.setPackagesToScan("com.github.commerce03.repository.post","com.github.commerce03.repository.like");
+        em.setPackagesToScan("com.github.commerce03.repository.post","com.github.commerce03.repository.commend");
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
