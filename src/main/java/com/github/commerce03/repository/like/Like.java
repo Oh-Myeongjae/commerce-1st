@@ -1,6 +1,5 @@
 package com.github.commerce03.repository.like;
 
-import com.github.commerce03.repository.post.Post;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,7 +21,7 @@ public class Like {
 //    @JoinColumn(name = "user_id")
 //    private User userId;
 
-    @ManyToOne
-    @JoinColumn(name = "po_id")
-    private Post post;
+//    @ManyToOne
+//    @JoinColumn(name = "com_id")
+//    private Commend commend;
 }

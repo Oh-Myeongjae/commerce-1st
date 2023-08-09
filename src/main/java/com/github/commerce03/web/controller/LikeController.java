@@ -17,9 +17,9 @@ public class LikeController {
 
     private final LikeService likeService;
     @PostMapping("/commend/like")
-    public String createLike(@RequestBody LikeRequestDto likeRequestDto){
+    public String commendLike(@RequestBody LikeRequestDto likeRequestDto){
         log.info("POST /commend/like 요청이 들어왔습니다.");
-        return likeService.createLike(likeRequestDto);
+        return likeService.commendLike(likeRequestDto);
     }
 
 }

@@ -11,5 +11,5 @@ import lombok.ToString;
 @ToString
 public class LikeRequestDto {
     private String userEmail;
-    private Integer poId;
+    private Integer commendId;
 }
