@@ -1,8 +1,8 @@
 package com.github.commerce03.web.controller;
 
 import com.github.commerce03.service.CommendService;
-import com.github.commerce03.web.dto.CommendRequest;
-import com.github.commerce03.web.dto.CommendResponse;
+import com.github.commerce03.web.dto.commend.CommendRequest;
+import com.github.commerce03.web.dto.commend.CommendResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

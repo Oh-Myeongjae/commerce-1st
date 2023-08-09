@@ -1,11 +1,13 @@
 package com.github.commerce03.service;
 
 
-import com.github.commerce03.repository.CommendRepository;
-import com.github.commerce03.repository.entity.Commend;
+import com.github.commerce03.repository.commend.Commend;
+import com.github.commerce03.repository.commend.CommendRepository;
+import com.github.commerce03.repository.post.Post;
+import com.github.commerce03.repository.post.PostJpaRepository;
 import com.github.commerce03.service.exeptions.NotFoundException;
-import com.github.commerce03.web.dto.CommendRequest;
-import com.github.commerce03.web.dto.CommendResponse;
+import com.github.commerce03.web.dto.commend.CommendRequest;
+import com.github.commerce03.web.dto.commend.CommendResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,18 +20,21 @@ import java.util.List;
 public class CommendService {
 
     private final CommendRepository commentRepository;
+    private final PostJpaRepository postJpaRepository;
 
     public String postCommend( CommendRequest commendRequest /*,Integer poId*/){
+
+        Post post = postJpaRepository.findById(commendRequest.getPoId()).orElseThrow(
+                () -> new NotFoundException("해당 게시글을 찾을 수 없습니다."));
 
         Commend commend = Commend.builder()
                 .comContent(commendRequest.getComContent())
                 .comAuthor(commendRequest.getComAuthor())
-//                .poId(poId)
+                .post(post)
                 .build();
 
         commentRepository.save(commend);
 
-//        Integer comId = Integer.valueOf(commend.getComId());
         return "댓글이 성공적으로 작성되었습니다.";
     }//수정
 

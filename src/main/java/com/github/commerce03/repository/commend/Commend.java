@@ -1,6 +1,7 @@
-package com.github.commerce03.repository.entity;
+package com.github.commerce03.repository.commend;
 
 
+import com.github.commerce03.repository.post.Post;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,8 +27,9 @@ public class Commend {
     @Column(name = "com_author")
     private String comAuthor;
 
-//    @Column(name ="po_id")
-//    private Integer poId;
+    @ManyToOne
+    @JoinColumn(name = "po_id")
+    private Post post;
 
     public void setCommend(String comContent,String comAuthor){
         this.comContent = comContent;

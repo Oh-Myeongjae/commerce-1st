@@ -1,6 +1,6 @@
-package com.github.commerce03.web.dto;
+package com.github.commerce03.web.dto.commend;
 
-import com.github.commerce03.repository.entity.Commend;
+import com.github.commerce03.repository.commend.Commend;
 import lombok.Data;
 
 import java.util.List;

@@ -1,6 +1,5 @@
-package com.github.commerce03.repository;
+package com.github.commerce03.repository.commend;
 
-import com.github.commerce03.repository.entity.Commend;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
