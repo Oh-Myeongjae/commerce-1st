@@ -45,4 +45,5 @@ public class JpaConfig {
         transactionManager.setEntityManagerFactory(entityManagerFactoryBean(dataSource).getObject());
         return transactionManager;
     }
+
 }

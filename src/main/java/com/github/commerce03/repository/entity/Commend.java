@@ -26,6 +26,11 @@ public class Commend {
     @Column(name = "com_author")
     private String comAuthor;
 
-    @Column(name ="po_id")
-    private Integer poId;
+//    @Column(name ="po_id")
+//    private Integer poId;
+
+    public void setCommend(String comContent,String comAuthor){
+        this.comContent = comContent;
+        this.comAuthor = comAuthor;
+    }
 }
