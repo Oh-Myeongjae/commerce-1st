@@ -15,6 +15,7 @@ import java.util.Map;
 
 @Configuration
 @EnableJpaRepositories(
+        basePackages = {"com.github.commerce03.repository.post"},
         basePackages = {"com.github.commerce03.repository"},
         entityManagerFactoryRef = "entityManagerFactoryBean",
         transactionManagerRef = "tm"
@@ -25,6 +26,7 @@ public class JpaConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean(DataSource dataSource){
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource);
+        em.setPackagesToScan("com.github.commerce03.repository.post");
         em.setPackagesToScan("com.github.commerce03.repository");
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
@@ -32,9 +34,9 @@ public class JpaConfig {
 
         Map<String, Object> properties = new HashMap<>();
         properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
-        properties.put("hibernate.format_sql", "true");
-        properties.put("hibernate.use_sql_comment", "true");
-//        properties.put("hibernate.hbm2ddl.auto","update");
+        properties.put("hibernate.format_sql", "true"); //sql 포멧 이쁘게 보기(안하면 한줄로 나옴)
+        properties.put("hibernate.use_sql_comment", "true");    //SQL 볼때 주석 처리 된것두 확인하기
+        properties.put("hibernate.hbm2ddl.auto","update");  //테이블 자동생성
         em.setJpaPropertyMap(properties);
         return em;
     }
@@ -45,5 +47,4 @@ public class JpaConfig {
         transactionManager.setEntityManagerFactory(entityManagerFactoryBean(dataSource).getObject());
         return transactionManager;
     }
-
 }
