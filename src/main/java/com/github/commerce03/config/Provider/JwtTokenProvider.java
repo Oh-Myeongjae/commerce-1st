@@ -43,4 +43,7 @@ public class JwtTokenProvider {
         }
     }
 
+    public String getSecretKey() {
+        return secretKey;
+    }
 }

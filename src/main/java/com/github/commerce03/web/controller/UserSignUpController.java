@@ -4,6 +4,8 @@ import com.github.commerce03.config.Provider.JwtTokenProvider;
 import com.github.commerce03.repository.user.UserEntity;
 import com.github.commerce03.service.UserSignUpService;
 import com.github.commerce03.web.dto.User;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
@@ -54,12 +57,26 @@ public class UserSignUpController {
 
     }
 
-    @PostMapping("/logout")
-    public ResponseEntity<Map<String, String>> userLogout(@RequestBody User user, HttpServletResponse response) {
-        String email = user.getEmail();
 
-        return ResponseEntity.ok(Map.of("message", "로그아웃되었습니다."));
+    @PostMapping("/logout")
+    public ResponseEntity<Map<String, String>> userLogout(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) {
+        String email = user.getEmail();
+        String token = jwtTokenProvider.resolveToken(request);
+
+        if (token != null && jwtTokenProvider.validateToken(token)) {
+            Claims claims = Jwts.parser().setSigningKey(jwtTokenProvider.getSecretKey()).parseClaimsJws(token).getBody();
+            String tokenEmail = claims.getSubject();
+
+            if (email.equals(tokenEmail)) {
+                //토큰 삭제 로직
+
+                return ResponseEntity.ok(Map.of("message", "로그아웃되었습니다."));
+            }
+        }
+
+        return ResponseEntity.badRequest().body(Map.of("message", "로그아웃 실패"));
     }
+
 
 
 
