@@ -3,7 +3,6 @@ package com.github.commerce03.web.controller;
 import com.github.commerce03.service.PostService;
 import com.github.commerce03.web.dto.post.PostRequestDto;
 import com.github.commerce03.web.dto.post.PostResponseDto;
-import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
