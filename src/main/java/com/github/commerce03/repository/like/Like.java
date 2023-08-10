@@ -1,5 +1,6 @@
 package com.github.commerce03.repository.like;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.commerce03.repository.commend.Commend;
 import lombok.*;
 
@@ -24,5 +25,9 @@ public class Like {
 
     @ManyToOne
     @JoinColumn(name = "com_id")
+    @JsonIgnore
     private Commend commend;
+
+    public Like(Like like) {
+    }
 }

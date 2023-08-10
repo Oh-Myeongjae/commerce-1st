@@ -13,7 +13,7 @@ public class JdbcConfig {
     public DataSource dataSource(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setUsername("root");
-        dataSource.setPassword("asdf1234");
+        dataSource.setPassword("12341234");
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/commerce_1st?useUnicode=true&characterEncoding=UTF-8");
         return dataSource;

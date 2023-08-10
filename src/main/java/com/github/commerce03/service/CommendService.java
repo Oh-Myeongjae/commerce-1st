@@ -8,10 +8,12 @@ import com.github.commerce03.repository.post.PostJpaRepository;
 import com.github.commerce03.service.exeptions.NotFoundException;
 import com.github.commerce03.web.dto.commend.CommendRequest;
 import com.github.commerce03.web.dto.commend.CommendResponse;
+import com.github.commerce03.web.dto.commend.CommendResponseListDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,11 +29,14 @@ public class CommendService {
         Post post = postJpaRepository.findById(commendRequest.getPoId()).orElseThrow(
                 () -> new NotFoundException("해당 게시글을 찾을 수 없습니다."));
 
+
         Commend commend = Commend.builder()
                 .comContent(commendRequest.getComContent())
                 .comAuthor(commendRequest.getComAuthor())
                 .post(post)
                 .build();
+
+
 
         commentRepository.save(commend);
 
@@ -57,11 +62,19 @@ public class CommendService {
         return "id [" + id + "] 업데이트 완료!";
     }
 
-    public CommendResponse getAllCommend() {
+    public CommendResponseListDto getAllCommend() {
         List<Commend> commends = commentRepository.findAll();
-        CommendResponse commendResponse = new CommendResponse();
-        commendResponse.setCommends(commends);
 
-        return commendResponse;
+        List<CommendResponse> commendResponseList = new ArrayList<>();
+
+        for(Commend commend : commends){
+            CommendResponse commendResponseCreated = new CommendResponse(commend.getComId(),commend.getComContent(),commend.getComAuthor(),commend.getLikes().size());
+            commendResponseList.add(commendResponseCreated);
+        }
+
+        CommendResponseListDto commendResponseListDto = new CommendResponseListDto();
+        commendResponseListDto.setLists(commendResponseList);
+
+        return commendResponseListDto;
     }
 }
