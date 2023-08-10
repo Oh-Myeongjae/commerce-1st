@@ -2,6 +2,7 @@ package com.github.commerce03.service;
 
 import com.github.commerce03.repository.post.Post;
 import com.github.commerce03.repository.post.PostJpaRepository;
+import com.github.commerce03.service.exeptions.NotFoundException;
 import com.github.commerce03.service.mapper.PostMapper;
 import com.github.commerce03.web.dto.post.PostRequestDto;
 import com.github.commerce03.web.dto.post.PostResponseDto;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,5 +45,12 @@ public class PostService {
         Post post = postJpaRepository.findById(postId).orElseThrow(()->new RuntimeException("게시글이 존재하지 않습니다."));
         postJpaRepository.delete(post);
         return "게시글이 성공적으로 삭제되었습니다.";
+    }
+
+    public List<PostResponseDto> findByEmail(String usrEmail) {
+//        List<Post> list = postJpaRepository.findAllUsr
+        List<Post> list = new ArrayList<>();
+        if(list.isEmpty())throw new NotFoundException("해당 이메일로 작성된 게시글을 찾을수 없습니다.");
+        return list.stream().map(PostMapper.INSTANCE::postToPostResponseDto).collect(Collectors.toList());
     }
 }

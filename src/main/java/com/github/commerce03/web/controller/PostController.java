@@ -41,4 +41,12 @@ public class PostController {
     public String deleteItemByPathId(@PathVariable Integer post_id){
         return postService.deletePost(post_id);
     }
+
+    @GetMapping("/posts/search")
+    public List<PostResponseDto> findByEmail(@RequestParam("author_email")String usrEmail){
+        log.info("GET /posts/search 요청이 들어왔습니다.");
+        List<PostResponseDto> posts = postService.findByEmail(usrEmail);
+        log.info("GET /posts/search 응답: " + posts);
+        return posts;
+    }
 }

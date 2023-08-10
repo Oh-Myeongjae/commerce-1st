@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PostJpaRepository extends JpaRepository<Post,Integer> {
+//    List<Post> findAllByUSER_ID;
 }
