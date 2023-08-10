@@ -15,29 +15,32 @@ import java.util.Map;
 
 @Configuration
 @EnableJpaRepositories(
-        basePackages = {"com.github.commerce03.repository.post","com.github.commerce03.repository.like",
+        basePackages = {"com.github.commerce03.repository.user","com.github.commerce03.repository.post","com.github.commerce03.repository.like",
                 "com.github.commerce03.repository.commend"},
         entityManagerFactoryRef = "entityManagerFactoryBean",
         transactionManagerRef = "tm"
 )
+
 public class JpaConfig {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean(DataSource dataSource){
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource);
-        em.setPackagesToScan("com.github.commerce03.repository.post","com.github.commerce03.repository.like",
+        em.setPackagesToScan("com.github.commerce03.repository.user","com.github.commerce03.repository.post","com.github.commerce03.repository.like",
                 "com.github.commerce03.repository.commend");
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
 
-        Map<String, Object> properties = new HashMap<>();
+        Map<String,Object> properties = new HashMap<>();
         properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
-        properties.put("hibernate.format_sql", "true"); //sql 포멧 이쁘게 보기(안하면 한줄로 나옴)
-        properties.put("hibernate.use_sql_comment", "true");    //SQL 볼때 주석 처리 된것두 확인하기
-        properties.put("hibernate.hbm2ddl.auto","update");  //테이블 자동생성
+        properties.put("hibernate.format_sql", "true");
+        properties.put("hibernate.use_sql_comment", "true");
+
         em.setJpaPropertyMap(properties);
+
+
         return em;
     }
 
