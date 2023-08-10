@@ -17,13 +17,10 @@ public class JdbcConfig {
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/commerce_1st?useUnicode=true&characterEncoding=UTF-8");
         return dataSource;
-
-
     }
 
     @Bean
-    public JdbcTemplate jdbcTemplate1() {
-        return new JdbcTemplate(dataSource()); }
+    public JdbcTemplate jdbcTemplate1() {return new JdbcTemplate(dataSource()); }
 
 //    @Bean
 //    public PlatformTransactionManager transactionManager() { return new DataSourceTransactionManager(dataSource()); }
