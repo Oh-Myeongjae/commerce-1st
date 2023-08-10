@@ -68,7 +68,7 @@ public class UserSignUpController {
             String tokenEmail = claims.getSubject();
 
             if (email.equals(tokenEmail)) {
-                //토큰 삭제 로직
+                //토큰 삭제 로직 asdas
 
                 return ResponseEntity.ok(Map.of("message", "로그아웃되었습니다."));
             }
