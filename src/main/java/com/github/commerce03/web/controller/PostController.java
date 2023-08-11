@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -27,9 +28,9 @@ public class PostController {
     }
 
     @PostMapping("/posts")
-    public String createPost(@RequestBody PostRequestDto postRequestDto){
+    public String createPost(@RequestBody PostRequestDto postRequestDto, HttpServletRequest request){
         log.info("POST /posts 요청이 들어왔습니다.");
-        return postService.createPost(postRequestDto);
+        return postService.createPost(postRequestDto,request);
     }
 
     @PutMapping("/posts/{post_id}")

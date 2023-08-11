@@ -37,7 +37,7 @@ public class JpaConfig {
         properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
         properties.put("hibernate.format_sql", "true");
         properties.put("hibernate.use_sql_comment", "true");
-
+        properties.put("hibernate.hbm2ddl.auto","update");  //테이블 자동생성
         em.setJpaPropertyMap(properties);
 
 
