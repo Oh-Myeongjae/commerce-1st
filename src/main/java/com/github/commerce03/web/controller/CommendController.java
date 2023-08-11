@@ -2,7 +2,7 @@ package com.github.commerce03.web.controller;
 
 import com.github.commerce03.service.CommendService;
 import com.github.commerce03.web.dto.commend.CommendRequest;
-import com.github.commerce03.web.dto.commend.CommendResponse;
+import com.github.commerce03.web.dto.commend.CommendResponseListDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +30,7 @@ public class CommendController {
         return commentService.deleteCommend(id);
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public String updateCommend(@PathVariable Integer id, @RequestBody CommendRequest commendRequest){
         String comContent = commendRequest.getComContent();
         String comAuthor = commendRequest.getComAuthor();
@@ -39,8 +39,8 @@ public class CommendController {
     }
 
     @GetMapping
-    public CommendResponse getAllCommend(){
-        CommendResponse commendResponse = commentService.getAllCommend();
-        return commendResponse;
+    public CommendResponseListDto getAllCommend(){
+        CommendResponseListDto commendResponseListDto = commentService.getAllCommend();
+        return commendResponseListDto;
     }
 }
