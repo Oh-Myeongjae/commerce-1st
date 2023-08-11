@@ -59,7 +59,7 @@ public class UserSignUpController {
 
 
     @PostMapping("/logout")
-    public ResponseEntity<Map<String, String>> userLogout(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<Map<String, String>> userLogout(@RequestBody User user, HttpServletRequest request) {
         String email = user.getEmail();
         String token = jwtTokenProvider.resolveToken(request);
 

@@ -1,5 +1,6 @@
 package com.github.commerce03.repository.post;
 
+import com.github.commerce03.repository.user.UserEntity;
 import com.github.commerce03.web.dto.post.PostRequestDto;
 import lombok.*;
 
@@ -30,7 +31,7 @@ public class Post {
         this.poContent = postRequestDto.getContent();
         this.poCreatedAt = LocalDateTime.now();
     }
-//    @ManyToOne
-//    @JoinColumn(name = "user_id", nullable = false)
-//    private User user_id;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserEntity user;
 }

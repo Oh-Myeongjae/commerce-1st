@@ -2,6 +2,7 @@ package com.github.commerce03.service.mapper;
 
 import com.github.commerce03.repository.commend.Commend;
 import com.github.commerce03.repository.like.Like;
+import com.github.commerce03.repository.user.UserEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -18,6 +19,6 @@ public interface LikeMapper {
 //    PostResponseDto postToPostResponseDto(Post post);
 
 
-    Like LikeRequestDtoToLike(Commend commend);
+    Like LikeRequestDtoToLike(Commend commend, UserEntity user);
 
 }

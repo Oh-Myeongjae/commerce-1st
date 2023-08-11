@@ -1,10 +1,12 @@
 package com.github.commerce03.repository.commend;
 
 
+import com.github.commerce03.repository.like.Like;
 import com.github.commerce03.repository.post.Post;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -30,6 +32,11 @@ public class Commend {
     @ManyToOne
     @JoinColumn(name = "po_id")
     private Post post;
+
+    @OneToMany(mappedBy = "commend") //이미 DB에서 찾아온 데이터들
+    private List<Like> likes;
+    //like - comid로 댓글 좋아요 개수 찾기
+
 
     public void setCommend(String comContent,String comAuthor){
         this.comContent = comContent;

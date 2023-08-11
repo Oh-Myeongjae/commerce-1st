@@ -1,6 +1,7 @@
 package com.github.commerce03.service.mapper;
 
 import com.github.commerce03.repository.post.Post;
+import com.github.commerce03.repository.user.UserEntity;
 import com.github.commerce03.web.dto.post.PostRequestDto;
 import com.github.commerce03.web.dto.post.PostResponseDto;
 import org.mapstruct.Mapper;
@@ -23,15 +24,22 @@ public interface PostMapper {
 //    @Mapping(target = "poTitle", source = "poTitle")
 //    @Mapping(target = "poContent", source = "poContent")
     @Mapping(target = "poCreatedAt", source = "poCreatedAt", qualifiedByName = "convert")
+    @Mapping(target = "poAuthor", source = "post", qualifiedByName = "getAuthor")
     PostResponseDto postToPostResponseDto(Post post);
 
-    @Mapping(target ="poTitle", source = "title")
-    @Mapping(target ="poContent", source = "content")
-    Post PostRequestDtoToPost(PostRequestDto postRequestDto);
+    @Mapping(target ="poTitle", source = "postRequestDto.title")
+    @Mapping(target ="poContent", source = "postRequestDto.content")
+    @Mapping(target ="user", source = "userEntity")
+    Post PostRequestDtoToPost(PostRequestDto postRequestDto, UserEntity userEntity);
 
     @Named("convert")
     static String localDateTimeToString(LocalDateTime localDateTime){
         if(localDateTime != null)return localDateTime.format(formatter);
         else return null;
+    }
+
+    @Named("getAuthor")
+    static String postGetAuthor(Post post){
+        return post.getUser().getUserEmail();
     }
 }

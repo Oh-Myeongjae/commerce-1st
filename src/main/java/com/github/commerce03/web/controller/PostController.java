@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -27,9 +28,9 @@ public class PostController {
     }
 
     @PostMapping("/posts")
-    public String createPost(@RequestBody PostRequestDto postRequestDto){
+    public String createPost(@RequestBody PostRequestDto postRequestDto, HttpServletRequest request){
         log.info("POST /posts 요청이 들어왔습니다.");
-        return postService.createPost(postRequestDto);
+        return postService.createPost(postRequestDto,request);
     }
 
     @PutMapping("/posts/{post_id}")
@@ -40,5 +41,13 @@ public class PostController {
     @DeleteMapping("/posts/{post_id}")
     public String deleteItemByPathId(@PathVariable Integer post_id){
         return postService.deletePost(post_id);
+    }
+
+    @GetMapping("/posts/search")
+    public List<PostResponseDto> findByEmail(@RequestParam("author_email")String usrEmail){
+        log.info("GET /posts/search 요청이 들어왔습니다.");
+        List<PostResponseDto> posts = postService.findByEmail(usrEmail);
+        log.info("GET /posts/search 응답: " + posts);
+        return posts;
     }
 }
